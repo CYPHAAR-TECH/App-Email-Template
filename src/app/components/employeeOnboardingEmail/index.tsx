@@ -10,7 +10,98 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
-import styles from "../../styles/emailStyles";
+
+const main = {
+  backgroundColor: '#ffffff',
+  color: '#333',
+  fontFamily:
+    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+  fontSize: '18px',
+};
+
+const container = {
+  margin: '0 auto',
+  padding: '20px 0 48px',
+};
+
+const typography = {
+  fontSize: '30px',
+  fontWeight: '600',
+  lineHeight: '48px',
+};
+
+const title = {
+  fontSize: '18px',
+  fontWeight: '500',
+  paddingTop: '30px',
+};
+
+const details = {
+  fontSize: '18px',
+};
+
+const paragraph = {
+  fontSize: '18px',
+  lineHeight: '28px',
+  fontWeight: '36px',
+};
+
+const buttonText = {
+  display: 'block',
+  fontSize: '16px',
+  padding: '0 20px',
+  margin: '10px 0',
+};
+
+const headerSection = {
+  lineHeight: '',
+};
+
+const logoText = {
+  fontSize: '40px',
+  fontWeight: '800',
+};
+
+const imageSection = {
+  display: 'flex',
+  padding: '40px 0',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const link = {
+  color: '#5A63E6',
+  fontWeight: 'bold',
+  fontFamily:
+    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+  fontSize: '16px',
+  textDecoration: 'underline',
+  cursor: 'pointer',
+};
+
+const linkSection = {
+  display: 'flex',
+  justifyContent: 'center',
+};
+
+const footer = {
+  display: 'flex',
+  color: '#ffffff',
+  backgroundColor: '#5A63E6',
+  padding: '40px 0',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const footerText = {
+  fontSize: '10px',
+  lineHeight: '16px',
+};
+
+const footerIcons = {
+  color: '#ffffff',
+  marginLeft: '20px',
+};
 
 interface EmployeeOnboardingEmailProps {
   userFullname: string;
@@ -37,13 +128,13 @@ const EmployeeOnboardingEmail = ({
 }: EmployeeOnboardingEmailProps) => (
   <Html>
     <Head />
-    <Body style={styles.main}>
+    <Body style={main}>
       <Container>
-        <div style={styles.container}>
-          <section style={styles.headerSection}>
-            <Text style={styles.logoText}>LOGO</Text>
+        <div style={container}>
+          <section style={headerSection}>
+            <Text style={logoText}>LOGO</Text>
           </section>
-          <Section style={styles.imageSection}>
+          <Section style={imageSection}>
             <Image
               className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
               src="/assets/imgs/dedukt-logo.png"
@@ -53,59 +144,59 @@ const EmployeeOnboardingEmail = ({
               priority
             />
           </Section>
-          <Text style={styles.typography}>
+          <Text style={typography}>
             Welcome to <span style={{color: '#5A63E6'}}>Ekaruz</span>! Your Onboarding Starts Here
           </Text>
-          <Text style={styles.title}>Hello {userFullname},</Text>
+          <Text style={title}>Hello {userFullname},</Text>
           <Section style={{ marginBottom: '40px' }}>
-            <Text style={styles.paragraph}>
+            <Text style={paragraph}>
               Welcome to Ekaruz. We're excited to have you on board and look forward to working together.
             </Text>
             <Section style={{ marginBottom: '10px' }}>
-              <Text style={styles.details}>
+              <Text style={details}>
                 Here are your onboarding Details:
               </Text>
-              <Text style={styles.details}>
+              <Text style={details}>
                 <span style={{fontWeight: '600'}}>Start Date: </span> 
                 {date}
               </Text>
-              <Text style={styles.details}>
+              <Text style={details}>
                 <span style={{fontWeight: '600'}}>Job Title: </span> 
                 {jobTitle}
               </Text>
-              <Text style={styles.details}>
+              <Text style={details}>
                 <span style={{fontWeight: '600'}}>Department: </span>
                 {department}
               </Text>
-              <Text style={styles.details}>
+              <Text style={details}>
                 <span style={{fontWeight: '600'}}>Manager: </span>
                 {manager}
               </Text>
             </Section>
             <Section style={{ marginBottom: '10px' }}>
-              <Text style={styles.details}>
+              <Text style={details}>
                 Your Company Login Credentials:
               </Text>
-              <Text style={styles.details}>
+              <Text style={details}>
                 <span style={{fontWeight: '600'}}>Portal: </span> 
-                <Link style={styles.link}>{verificationLink}</Link>
+                <Link style={link}>{verificationLink}</Link>
               </Text>
-              <Text style={styles.details}>
+              <Text style={details}>
                 <span style={{fontWeight: '600'}}>Username: </span> 
                 {username}
               </Text>
-              <Text style={styles.details}>
+              <Text style={details}>
                 <span style={{fontWeight: '600'}}>Temporary Password: </span>
                 {password}
               </Text>
             </Section>
-            <Text style={styles.paragraph}>
+            <Text style={paragraph}>
               Please log in and change your password upon first login
             </Text>
-            <Text style={styles.paragraph}>
+            <Text style={paragraph}>
               Welcome aboard!
             </Text>
-            <Text style={styles.title}>
+            <Text style={title}>
               Best regards,
               <br />
               {managerName}
@@ -118,21 +209,30 @@ const EmployeeOnboardingEmail = ({
         </div>
       </Container>
       <Section>
-        <Text style={styles.linkSection}>
-          <Link href="https://google.com" target="_blank" style={styles.link}>
+        <Text style={linkSection}>
+          <Link href="https://google.com" target="_blank" style={link}>
             Deduktpro@gmail.com
           </Link>{' '}
           |{' '}
-          <Link href="https://google.com" target="_blank" style={styles.link}>
+          <Link href="https://google.com" target="_blank" style={link}>
             08100000000
           </Link>
         </Text>
-        <Section style={styles.footer}>
-          <FaFacebook style={{ fontSize: "18px", marginLeft: "20px", border: "none", outline: "none" }} />
-          <FaTwitter style={{ fontSize: "18px", marginLeft: "20px", border: "none", outline: "none" }} />
-          <FaLinkedin style={{ fontSize: "18px", marginLeft: "20px", border: "none", outline: "none" }} />
-          <FaInstagram style={{ fontSize: "18px", marginLeft: "20px", border: "none", outline: "none" }} />
-          <Text style={styles.footerText}>
+        <Section style={footer}>
+          <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" style={footerIcons}>
+            <FaFacebook style={{ fontSize: "18px", border: "none", outline: "none" }} />
+          </Link>
+          <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={footerIcons}>
+            <FaTwitter style={{ fontSize: "18px", border: "none", outline: "none" }} />
+          </Link>
+          <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={footerIcons}>
+            <FaLinkedin style={{ fontSize: "18px", border: "none", outline: "none" }} />
+          </Link>
+          <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={footerIcons}>
+            <FaInstagram style={{ fontSize: "18px", border: "none", outline: "none" }} />
+          </Link>
+          
+          <Text style={footerText}>
             © 2023 Dedukt Pro. All rights reserved.
           </Text>
         </Section>
