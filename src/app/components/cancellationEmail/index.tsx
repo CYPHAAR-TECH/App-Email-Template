@@ -70,7 +70,7 @@ const imageSection = {
 };
 
 const link = {
-  color: '#5A63E6',
+  color: '#041E42',
   fontWeight: 'bold',
   fontFamily:
     "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
@@ -87,7 +87,7 @@ const linkSection = {
 const footer = {
   display: 'flex',
   color: '#ffffff',
-  backgroundColor: '#5A63E6',
+  backgroundColor: '#041E42',
   padding: '40px 0',
   alignItems: 'center',
   justifyContent: 'center',

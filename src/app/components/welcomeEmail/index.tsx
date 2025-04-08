@@ -70,7 +70,7 @@ const imageSection = {
 };
 
 const link = {
-  color: '#5A63E6',
+  color: '#041E42',
   fontWeight: 'bold',
   fontFamily:
     "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
@@ -87,7 +87,7 @@ const linkSection = {
 const footer = {
   display: 'flex',
   color: '#ffffff',
-  backgroundColor: '#5A63E6',
+  backgroundColor: '#041E42',
   padding: '40px 0',
   alignItems: 'center',
   justifyContent: 'center',
@@ -142,7 +142,8 @@ const WelcomeEmail = ({
               {`Your one-time verification code is: `} <span style={{ fontWeight: 'bold', fontSize: '18px' }}>{token}</span>
             </Text>
             <Text style={paragraph}>
-              At Dedukt Pro, we're dedicated to <span>[brief company mission or vision]</span>. You now have full access to our platform where you can <span>[mention key features]</span>
+              At Dedukt Pro, we're dedicated to <span>[brief company mission or vision]</span>. 
+              You now have full access to our platform where you can <span>[mention key features]</span>
             </Text>
             <Text style={title}>
               Best regards,
