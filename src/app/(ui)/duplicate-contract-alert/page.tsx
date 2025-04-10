@@ -1,14 +1,18 @@
-import DuplicateContractAlertEmail from '../../components/duplicateContractAlert'
+import DuplicateContractAlertEmail from '../../components/duplicateContractAlert';
 
 const DuplicateContractAlertEmailPage = () => {
+  const contractDetails = [
+    { label: "Full Name", value: "Okafor Victor" },
+    { label: "Employee ID", value: "ID000001" },
+    { label: "Biometric Type", value: "Fingerprint" }, 
+  ];
+
   return (
     <DuplicateContractAlertEmail
-      userFullname="Okafor Victor"
       adminName="Walter Ifeakanwa"
-      employeeId="ID000001"
-      biometricType="[Biometric Type]"
+      contracts={contractDetails}
     />
-  )
+  );
 };
 
 export default DuplicateContractAlertEmailPage;

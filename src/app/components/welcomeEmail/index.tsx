@@ -1,9 +1,9 @@
-import Image from "next/image";
 import {
   Html,
   Head,
   Body,
   Container,
+  Img,
   Text,
   Link,
   Section,
@@ -11,102 +11,33 @@ import {
 import * as React from "react";
 import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
-const main = {
-  backgroundColor: '#ffffff',
-  color: '#333',
-  fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-  fontSize: '18px',
-};
-
-const container = {
-  margin: '0 auto',
-  padding: '20px 0 48px',
-};
-
-const typography = {
-  fontSize: '30px',
-  fontWeight: '600',
-  lineHeight: '48px',
-};
-
-const title = {
-  fontSize: '18px',
-  fontWeight: '500',
-  paddingTop: '30px',
-};
-
-const details = {
-  fontSize: '18px',
-};
-
-const paragraph = {
-  fontSize: '18px',
-  lineHeight: '28px',
-  fontWeight: '36px',
-};
-
-const buttonText = {
-  display: 'block',
-  fontSize: '16px',
-  padding: '0 20px',
-  margin: '10px 0',
-};
-
-const headerSection = {
-  lineHeight: '',
-};
-
-const logoText = {
-  fontSize: '40px',
-  fontWeight: '800',
-};
-
-const imageSection = {
-  display: 'flex',
-  padding: '40px 0',
-  alignItems: 'center',
-  justifyContent: 'center',
-};
-
-const link = {
-  color: '#041E42',
-  fontWeight: 'bold',
-  fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-  fontSize: '16px',
-  textDecoration: 'underline',
-  cursor: 'pointer',
-};
-
-const linkSection = {
-  display: 'flex',
-  justifyContent: 'center',
-};
-
-const footer = {
-  display: 'flex',
-  color: '#ffffff',
-  backgroundColor: '#041E42',
-  padding: '40px 0',
-  alignItems: 'center',
-  justifyContent: 'center',
-};
-
-const footerText = {
-  fontSize: '10px',
-  lineHeight: '16px',
-};
-
-const footerIcons = {
-  color: '#ffffff',
-  marginLeft: '20px',
-};
-
 interface WelcomeEmailProps {
   companyName: string;
   token: string;
 }
+
+const socialLinks = [
+  {
+    href: "https://facebook.com",
+    Icon: FaFacebook,
+    label: "Facebook",
+  },
+  {
+    href: "https://twitter.com",
+    Icon: FaTwitter,
+    label: "Twitter",
+  },
+  {
+    href: "https://linkedin.com",
+    Icon: FaLinkedin,
+    label: "LinkedIn",
+  },
+  {
+    href: "https://instagram.com",
+    Icon: FaInstagram,
+    label: "Instagram",
+  },
+];
 
 const WelcomeEmail = ({
   companyName,
@@ -121,28 +52,25 @@ const WelcomeEmail = ({
             <Text style={logoText}>LOGO</Text>
           </section>
           <Section style={imageSection}>
-            <Image
-              className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
+            <Img
               src="/assets/imgs/dedukt-logo.png"
               alt="dedukt-pro Logo"
-              width={1012}
-              height={349}
-              priority
+              width={"100%"}
             />
           </Section>
           <Text style={typography}>
             Thank you for joining Dedukt Pro! Here's what's next!
           </Text>
           <Text style={title}>Hello {companyName},</Text>
-          <Section style={{ marginBottom: '40px' }}>
+          <Section style={bodySection}>
             <Text style={paragraph}>
               We're thrilled to have you onboard! Thank you for verifying your email.
             </Text>
             <Text style={paragraph}>
-              {`Your one-time verification code is: `} <span style={{ fontWeight: 'bold', fontSize: '18px' }}>{token}</span>
+              {`Your one-time verification code is: `} <span style={paragraph.span}>{token}</span>
             </Text>
             <Text style={paragraph}>
-              At Dedukt Pro, we're dedicated to <span>[brief company mission or vision]</span>. 
+              At Dedukt Pro, we're dedicated to <span>[brief company mission or vision]</span>.
               You now have full access to our platform where you can <span>[mention key features]</span>
             </Text>
             <Text style={title}>
@@ -163,20 +91,20 @@ const WelcomeEmail = ({
             08100000000
           </Link>
         </Text>
-        <Section style={footer}>
-          <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" style={footerIcons}>
-            <FaFacebook style={{ fontSize: "18px", border: "none", outline: "none" }} />
-          </Link>
-          <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={footerIcons}>
-            <FaTwitter style={{ fontSize: "18px", border: "none", outline: "none" }} />
-          </Link>
-          <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={footerIcons}>
-            <FaLinkedin style={{ fontSize: "18px", border: "none", outline: "none" }} />
-          </Link>
-          <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={footerIcons}>
-            <FaInstagram style={{ fontSize: "18px", border: "none", outline: "none" }} />
-          </Link>
-          
+        <Section style={footerSection}>
+          {socialLinks.map(({ href, Icon, label }) => (
+            <Link
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={footerIcons}
+              aria-label={label}
+            >
+              <Icon style={footerIcons} />
+            </Link>
+          ))}
+
           <Text style={footerText}>
             © 2023 Dedukt Pro. All rights reserved.
           </Text>
@@ -185,5 +113,125 @@ const WelcomeEmail = ({
     </Body>
   </Html>
 );
+
+
+const baseFont = {
+  fontFamily:
+    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+};
+
+const main = {
+  backgroundColor: '#ffffff',
+  color: '#333',
+  fontSize: '18px',
+  ...baseFont,
+};
+
+const container = {
+  margin: '0 auto',
+  padding: '20px 0 48px',
+};
+
+const typography = {
+  fontSize: '30px',
+  fontWeight: '600',
+  lineHeight: '48px',
+
+  span: {
+    color: "#041E42",
+  },
+};
+
+const title = {
+  fontSize: '18px',
+  fontWeight: '500',
+  paddingTop: '30px',
+};
+
+const details = {
+  fontSize: '18px',
+
+  span: {
+    fontWeight: "600",
+  },
+};
+
+const paragraph = {
+  fontSize: '18px',
+  lineHeight: '28px',
+  fontWeight: '36px',
+
+  span: {
+    color: "#041E42",
+  },  
+};
+
+const buttonText = {
+  display: 'block',
+  fontSize: '16px',
+  padding: '0 20px',
+  margin: '10px 0',
+};
+
+const headerSection = {
+  lineHeight: '',
+};
+
+const bodySection = {
+  marginBottom: '40px',
+};
+
+const detailsSection = {
+  marginBottom: '40px',
+};
+
+const logoText = {
+  fontSize: '40px',
+  fontWeight: '800',
+};
+
+const imageSection = {
+  width: '100%',
+  display: 'flex',
+  padding: '40px 0',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const link = {
+  color: '#041E42',
+  fontWeight: 'bold',
+  fontSize: '16px',
+  textDecoration: 'underline',
+  cursor: 'pointer',
+  ...baseFont,
+};
+
+const linkSection = {
+  display: 'flex',
+  justifyContent: 'center',
+};
+
+const footerSection = {
+  display: 'flex',
+  color: '#ffffff',
+  backgroundColor: '#041E42',
+  padding: '40px 0',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const footerText = {
+  fontSize: '10px',
+  lineHeight: '16px',
+};
+
+const footerIcons = {
+  color: '#ffffff',
+  marginLeft: '10px',
+  fontSize: "18px",
+  border: "none",
+  outline: "none",
+};
 
 export default WelcomeEmail;
