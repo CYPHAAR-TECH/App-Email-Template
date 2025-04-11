@@ -9,7 +9,6 @@ import {
   Section,
 } from "@react-email/components";
 import * as React from "react";
-import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 type onboardingSections = {
   title: string;
@@ -29,23 +28,27 @@ interface EmployeeOnboardingEmailProps {
 const socialLinks = [
   {
     href: "https://facebook.com",
-    Icon: FaFacebook,
+    src: "/assets/imgs/facebook.png",
     label: "Facebook",
+    alt: "Facebook Icon",
   },
   {
     href: "https://twitter.com",
-    Icon: FaTwitter,
+    src: "/assets/imgs/twitter.png",
     label: "Twitter",
+    alt: "Twitter Icon",
   },
   {
     href: "https://linkedin.com",
-    Icon: FaLinkedin,
+    src: "/assets/imgs/linkedin.png",
     label: "LinkedIn",
+    alt: "LinkedIn Icon",
   },
   {
     href: "https://instagram.com",
-    Icon: FaInstagram,
+    src: "/assets/imgs/instagram.png",
     label: "Instagram",
+    alt: "Instagram Icon",
   },
 ];
 
@@ -122,18 +125,20 @@ const EmployeeOnboardingEmail = ({
           </Link>
         </Text>
         <Section style={footerSection}>
-          {socialLinks.map(({ href, Icon, label }) => (
-            <Link
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={footerIcons}
-              aria-label={label}
-            >
-              <Icon style={footerIcons} />
-            </Link>
-          ))}
+          <div style={iconContainer}>
+            {socialLinks.map(({ href, src, label, alt }) => (
+              <Link
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={footerIcons}
+                aria-label={label}
+              >
+                <Img src={src} alt={alt} style={footerIcons} />
+              </Link>
+            ))}
+          </div>
 
           <Text style={footerText}>
             © 2023 Dedukt Pro. All rights reserved.
@@ -244,17 +249,26 @@ const footerSection = {
   justifyContent: 'center',
 };
 
-const footerText = {
-  fontSize: '10px',
-  lineHeight: '16px',
+const iconContainer = {
+  display: 'flex',
+  gap: '16px',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginBottom: '16px',
 };
 
 const footerIcons = {
+  display: 'inline-block',
+  width: '16px',
+  height: '16px',
   color: '#ffffff',
-  marginLeft: '10px',
-  fontSize: "18px",
   border: "none",
   outline: "none",
+};
+
+const footerText = {
+  fontSize: '10px',
+  lineHeight: '16px',
 };
 
 export default EmployeeOnboardingEmail;
