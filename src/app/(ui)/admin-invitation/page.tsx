@@ -1,13 +1,18 @@
 import AdminInvitation from '../../components/adminInvitation'
 
 const AdminInvitationPage = () => {
+
+  const invitationDetails = [
+    { label: "Portal", value: "http://localhost:3000/verify-email", isLink: true },
+    { label: "Username", value: "cyphaar500@gmail.com" },
+    { label: "Temporary Password", value: "123456" },
+  ];
+
   return (
     <AdminInvitation
       userFullname="Okafor Victor"
-      username="cyphaar500@gmail.com"
       managerName="Walter Ifeakanwa"
-      verificationLink="http://localhost:3000/verify-email"
-      password='123456'
+      invitationDetails={invitationDetails}
     />
   )
 };

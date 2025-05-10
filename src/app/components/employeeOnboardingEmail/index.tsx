@@ -1,111 +1,108 @@
-import Image from "next/image";
 import {
   Html,
   Head,
   Body,
   Container,
+  Img,
   Text,
   Link,
   Section,
 } from "@react-email/components";
 import * as React from "react";
-import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
-import styles from "../../styles/emailStyles";
+
+type onboardingSections = {
+  title: string;
+  items: {
+    label: string;
+    value: string;
+    isLink?: boolean;
+  }[];
+};
 
 interface EmployeeOnboardingEmailProps {
   userFullname: string;
-  username: string;
   managerName: string;
-  verificationLink: string;
-  password: string;
-  date: string;
-  jobTitle: string;
-  department: string;
-  manager: string;
+  sections: onboardingSections[];
 }
+
+const socialLinks = [
+  {
+    href: "https://facebook.com",
+    src: "/assets/imgs/facebook.png",
+    label: "Facebook",
+    alt: "Facebook Icon",
+  },
+  {
+    href: "https://twitter.com",
+    src: "/assets/imgs/twitter.png",
+    label: "Twitter",
+    alt: "Twitter Icon",
+  },
+  {
+    href: "https://linkedin.com",
+    src: "/assets/imgs/linkedin.png",
+    label: "LinkedIn",
+    alt: "LinkedIn Icon",
+  },
+  {
+    href: "https://instagram.com",
+    src: "/assets/imgs/instagram.png",
+    label: "Instagram",
+    alt: "Instagram Icon",
+  },
+];
 
 const EmployeeOnboardingEmail = ({
   userFullname,
-  username,
   managerName,
-  verificationLink,
-  password,
-  date,
-  jobTitle,
-  department,
-  manager,
+  sections,
 }: EmployeeOnboardingEmailProps) => (
   <Html>
     <Head />
-    <Body style={styles.main}>
+    <Body style={main}>
       <Container>
-        <div style={styles.container}>
-          <section style={styles.headerSection}>
-            <Text style={styles.logoText}>LOGO</Text>
+        <div style={container}>
+          <section style={headerSection}>
+            <Text style={logoText}>LOGO</Text>
           </section>
-          <Section style={styles.imageSection}>
-            <Image
+          <Section style={imageSection}>
+            <Img
               className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
               src="/assets/imgs/dedukt-logo.png"
               alt="dedukt-pro Logo"
-              width={1012}
-              height={349}
-              priority
+              width={'100%'}
             />
           </Section>
-          <Text style={styles.typography}>
-            Welcome to <span style={{color: '#5A63E6'}}>Ekaruz</span>! Your Onboarding Starts Here
+          <Text style={typography}>
+            Welcome to <span style={typography.span}>Ekaruz</span>! Your Onboarding Starts Here
           </Text>
-          <Text style={styles.title}>Hello {userFullname},</Text>
-          <Section style={{ marginBottom: '40px' }}>
-            <Text style={styles.paragraph}>
+          <Text style={title}>Hello {userFullname},</Text>
+          <Section style={bodySection}>
+            <Text style={paragraph}>
               Welcome to Ekaruz. We're excited to have you on board and look forward to working together.
             </Text>
-            <Section style={{ marginBottom: '10px' }}>
-              <Text style={styles.details}>
-                Here are your onboarding Details:
-              </Text>
-              <Text style={styles.details}>
-                <span style={{fontWeight: '600'}}>Start Date: </span> 
-                {date}
-              </Text>
-              <Text style={styles.details}>
-                <span style={{fontWeight: '600'}}>Job Title: </span> 
-                {jobTitle}
-              </Text>
-              <Text style={styles.details}>
-                <span style={{fontWeight: '600'}}>Department: </span>
-                {department}
-              </Text>
-              <Text style={styles.details}>
-                <span style={{fontWeight: '600'}}>Manager: </span>
-                {manager}
-              </Text>
-            </Section>
-            <Section style={{ marginBottom: '10px' }}>
-              <Text style={styles.details}>
-                Your Company Login Credentials:
-              </Text>
-              <Text style={styles.details}>
-                <span style={{fontWeight: '600'}}>Portal: </span> 
-                <Link style={styles.link}>{verificationLink}</Link>
-              </Text>
-              <Text style={styles.details}>
-                <span style={{fontWeight: '600'}}>Username: </span> 
-                {username}
-              </Text>
-              <Text style={styles.details}>
-                <span style={{fontWeight: '600'}}>Temporary Password: </span>
-                {password}
-              </Text>
-            </Section>
-            <Text style={styles.paragraph}>
+            {sections.map((section, idx) => (
+              <Section key={idx} style={detailsSection}>
+                <Text style={details}>{section.title}</Text>
+                {section.items.map((item, itemIdx) => (
+                  <Text key={itemIdx} style={details}>
+                    <span style={details.span}>{item.label}: </span>
+                    {item.isLink ? (
+                      <Link style={link}>{item.value}</Link>
+                    ) : (
+                      item.value
+                    )}
+                  </Text>
+                ))}
+              </Section>
+            ))}
+            <Text style={paragraph}>
               Please log in and change your password upon first login
             </Text>
-            <Text style={styles.paragraph}>
+            <Text style={paragraph}>
               Welcome aboard!
             </Text>
-            <Text style={styles.title}>
+            <Text style={title}>
               Best regards,
               <br />
               {managerName}
@@ -118,21 +115,32 @@ const EmployeeOnboardingEmail = ({
         </div>
       </Container>
       <Section>
-        <Text style={styles.linkSection}>
-          <Link href="https://google.com" target="_blank" style={styles.link}>
+        <Text style={linkSection}>
+          <Link href="https://google.com" target="_blank" style={link}>
             Deduktpro@gmail.com
           </Link>{' '}
           |{' '}
-          <Link href="https://google.com" target="_blank" style={styles.link}>
+          <Link href="https://google.com" target="_blank" style={link}>
             08100000000
           </Link>
         </Text>
-        <Section style={styles.footer}>
-          <FaFacebook style={{ fontSize: "18px", marginLeft: "20px", border: "none", outline: "none" }} />
-          <FaTwitter style={{ fontSize: "18px", marginLeft: "20px", border: "none", outline: "none" }} />
-          <FaLinkedin style={{ fontSize: "18px", marginLeft: "20px", border: "none", outline: "none" }} />
-          <FaInstagram style={{ fontSize: "18px", marginLeft: "20px", border: "none", outline: "none" }} />
-          <Text style={styles.footerText}>
+        <Section style={footerSection}>
+          <div style={iconContainer}>
+            {socialLinks.map(({ href, src, label, alt }) => (
+              <Link
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={footerIcons}
+                aria-label={label}
+              >
+                <Img src={src} alt={alt} style={footerIcons} />
+              </Link>
+            ))}
+          </div>
+
+          <Text style={footerText}>
             © 2023 Dedukt Pro. All rights reserved.
           </Text>
         </Section>
@@ -140,5 +148,127 @@ const EmployeeOnboardingEmail = ({
     </Body>
   </Html>
 );
+
+
+const baseFont = {
+  fontFamily:
+    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+};
+
+const main = {
+  backgroundColor: '#ffffff',
+  color: '#333',
+  fontSize: '18px',
+  ...baseFont,
+};
+
+const container = {
+  margin: '0 auto',
+  padding: '20px 0 48px',
+};
+
+const typography = {
+  fontSize: '30px',
+  fontWeight: '600',
+  lineHeight: '48px',
+
+  span: {
+    color: "#041E42",
+  },
+};
+
+const title = {
+  fontSize: '18px',
+  fontWeight: '500',
+  paddingTop: '30px',
+};
+
+const details = {
+  fontSize: '18px',
+
+  span: {
+    fontWeight: "600",
+  },
+};
+
+const paragraph = {
+  fontSize: '18px',
+  lineHeight: '28px',
+  fontWeight: '36px',
+
+  span: {
+    color: "#041E42",
+  },
+};
+
+const headerSection = {
+  lineHeight: '',
+};
+
+const bodySection = {
+  marginBottom: '40px',
+};
+
+const detailsSection = {
+  marginBottom: '10px',
+};
+
+const logoText = {
+  fontSize: '40px',
+  fontWeight: '800',
+};
+
+const imageSection = {
+  width: '100%',
+  display: 'flex',
+  padding: '40px 0',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const link = {
+  color: '#041E42',
+  fontWeight: 'bold',
+  fontSize: '16px',
+  textDecoration: 'underline',
+  cursor: 'pointer',
+  ...baseFont,
+};
+
+const linkSection = {
+  display: 'flex',
+  justifyContent: 'center',
+};
+
+const footerSection = {
+  display: 'flex',
+  color: '#ffffff',
+  backgroundColor: '#041E42',
+  padding: '40px 0',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const iconContainer = {
+  display: 'flex',
+  gap: '16px',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginBottom: '16px',
+};
+
+const footerIcons = {
+  display: 'inline-block',
+  width: '16px',
+  height: '16px',
+  color: '#ffffff',
+  border: "none",
+  outline: "none",
+};
+
+const footerText = {
+  fontSize: '10px',
+  lineHeight: '16px',
+};
 
 export default EmployeeOnboardingEmail;

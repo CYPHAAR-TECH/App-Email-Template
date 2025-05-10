@@ -1,58 +1,81 @@
-import Image from "next/image";
 import {
   Html,
   Head,
   Body,
   Container,
+  Img,
   Text,
   Link,
   Section,
 } from "@react-email/components";
 import * as React from "react";
-import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
-import styles from "../../styles/emailStyles";
 
 interface CancellationEmailProps {
   userFirstname: string;
 }
+
+const socialLinks = [
+  {
+    href: "https://facebook.com",
+    src: "/assets/imgs/facebook.png",
+    label: "Facebook",
+    alt: "Facebook Icon",
+  },
+  {
+    href: "https://twitter.com",
+    src: "/assets/imgs/twitter.png",
+    label: "Twitter",
+    alt: "Twitter Icon",
+  },
+  {
+    href: "https://linkedin.com",
+    src: "/assets/imgs/linkedin.png",
+    label: "LinkedIn",
+    alt: "LinkedIn Icon",
+  },
+  {
+    href: "https://instagram.com",
+    src: "/assets/imgs/instagram.png",
+    label: "Instagram",
+    alt: "Instagram Icon",
+  },
+];
 
 const CancellationEmail = ({
   userFirstname,
 }: CancellationEmailProps) => (
   <Html>
     <Head />
-    <Body style={styles.main}>
+    <Body style={main}>
       <Container>
-        <div style={styles.container}>
-          <section style={styles.headerSection}>
-            <Text style={styles.logoText}>LOGO</Text>
+        <div style={container}>
+          <section style={headerSection}>
+            <Text style={logoText}>LOGO</Text>
           </section>
-          <Section style={styles.imageSection}>
-            <Image
+          <Section style={imageSection}>
+            <Img
               className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
               src="/assets/imgs/dedukt-logo.png"
               alt="dedukt-pro Logo"
-              width={1012}
-              height={349}
-              priority
+              width={'100%'}
             />
           </Section>
-          <Text style={styles.typography}>
+          <Text style={typography}>
             Your leave request has been cancelled!
           </Text>
-          <Text style={styles.title}>Hello {userFirstname},</Text>
-          <Section style={{ marginBottom: '40px' }}>
-            <Text style={styles.paragraph}>
-              This is to confirm that the leave request of <span>OLALEYE JOHN</span> with <span>ID: ID000001</span>
-              for 9th of October to 10th of   Septemeber has been successfully canceled as per your request.
+          <Text style={title}>Hello {userFirstname},</Text>
+          <Section style={bodySection}>
+            <Text style={paragraph}>
+              This is to confirm that the leave request of <span>OLALEYE JOHN</span> with <span>ID: ID000001 </span>
+              for 9th of October to 10th of Septemeber has been successfully canceled as per your request.
             </Text>
-            <Text style={styles.paragraph}>
-              You may reapply for leave through the HR system whenever necessary. 
+            <Text style={paragraph}>
+              You may reapply for leave through the HR system whenever necessary.
             </Text>
-            <Text style={styles.paragraph}>
-              If this was done in error or you need further assistance, kindly reach out. 
+            <Text style={paragraph}>
+              If this was done in error or you need further assistance, kindly reach out.
             </Text>
-            <Text style={styles.title}>
+            <Text style={title}>
               Best regards,
               <br />
               Dedukt Pro
@@ -61,21 +84,32 @@ const CancellationEmail = ({
         </div>
       </Container>
       <Section>
-        <Text style={styles.linkSection}>
-          <Link href="https://google.com" target="_blank" style={styles.link}>
+        <Text style={linkSection}>
+          <Link href="https://google.com" target="_blank" style={link}>
             Deduktpro@gmail.com
           </Link>{' '}
           |{' '}
-          <Link href="https://google.com" target="_blank" style={styles.link}>
+          <Link href="https://google.com" target="_blank" style={link}>
             08100000000
           </Link>
         </Text>
-        <Section style={styles.footer}>
-          <FaFacebook style={{ fontSize: "18px", marginLeft: "20px", border: "none", outline: "none" }} />
-          <FaTwitter style={{ fontSize: "18px", marginLeft: "20px", border: "none", outline: "none" }} />
-          <FaLinkedin style={{ fontSize: "18px", marginLeft: "20px", border: "none", outline: "none" }} />
-          <FaInstagram style={{ fontSize: "18px", marginLeft: "20px", border: "none", outline: "none" }} />
-          <Text style={styles.footerText}>
+        <Section style={footerSection}>
+          <div style={iconContainer}>
+            {socialLinks.map(({ href, src, label, alt }) => (
+              <Link
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={footerIcons}
+                aria-label={label}
+              >
+                <Img src={src} alt={alt} style={footerIcons} />
+              </Link>
+            ))}
+          </div>
+
+          <Text style={footerText}>
             © 2023 Dedukt Pro. All rights reserved.
           </Text>
         </Section>
@@ -83,5 +117,115 @@ const CancellationEmail = ({
     </Body>
   </Html>
 );
+
+
+const baseFont = {
+  fontFamily:
+    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+};
+
+const main = {
+  backgroundColor: '#ffffff',
+  color: '#333',
+  fontSize: '18px',
+  ...baseFont,
+};
+
+const container = {
+  margin: '0 auto',
+  padding: '20px 0 48px',
+};
+
+const typography = {
+  fontSize: '30px',
+  fontWeight: '600',
+  lineHeight: '48px',
+
+  span: {
+    color: "#041E42",
+  },
+};
+
+const title = {
+  fontSize: '18px',
+  fontWeight: '500',
+  paddingTop: '30px',
+};
+
+const paragraph = {
+  fontSize: '18px',
+  lineHeight: '28px',
+  fontWeight: '36px',
+
+  span: {
+    color: "#041E42",
+  },
+};
+
+const headerSection = {
+  lineHeight: '',
+};
+
+const bodySection = {
+  marginBottom: '40px',
+};
+
+const logoText = {
+  fontSize: '40px',
+  fontWeight: '800',
+};
+
+const imageSection = {
+  width: '100%',
+  display: 'flex',
+  padding: '40px 0',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const link = {
+  color: '#041E42',
+  fontWeight: 'bold',
+  fontSize: '16px',
+  textDecoration: 'underline',
+  cursor: 'pointer',
+  ...baseFont,
+};
+
+const linkSection = {
+  display: 'flex',
+  justifyContent: 'center',
+};
+
+const footerSection = {
+  display: 'flex',
+  color: '#ffffff',
+  backgroundColor: '#041E42',
+  padding: '40px 0',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const iconContainer = {
+  display: 'flex',
+  gap: '16px',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginBottom: '16px',
+};
+
+const footerIcons = {
+  display: 'inline-block',
+  width: '16px',
+  height: '16px',
+  color: '#ffffff',
+  border: "none",
+  outline: "none",
+};
+
+const footerText = {
+  fontSize: '10px',
+  lineHeight: '16px',
+};
 
 export default CancellationEmail;
